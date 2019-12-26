@@ -14,14 +14,12 @@ const Cart: React.FC<Props> = (props) => {
   }
 
   return (
-    <>
-      <div className="w-100 mb3">
-        {data.map((item) => {
-          return <CartItem {...item} />
-        })}
-      </div>
+    <div className="w-100 mb3 mh5">
+      {data.map((item) => {
+        return <CartItem {...item} key={item.name} />
+      })}
       {_renderTotal()}
-    </>
+    </div>
   )
 }
 

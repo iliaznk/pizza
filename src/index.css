@@ -8,6 +8,10 @@
   box-sizing: border-box !important;
 }
 
+html {
+  background-color: #fafafa;
+}
+
 body {
   margin: 0;
   font-family: Helvetica, 'Helvetica Neue', sans-serif;
@@ -16,7 +20,7 @@ body {
 }
 
 .card {
-  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .qty-button {
@@ -30,11 +34,12 @@ body {
   position: absolute;
   content: '';
   height: 1rem;
-  width: 0.125rem;
+  width: 0.25rem;
   background-color: white;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  border-radius: 3px;
 }
 
 .plus:after,
@@ -44,10 +49,11 @@ body {
   left: 50%;
   top: 50%;
   content: '';
-  height: 0.125rem;
+  height: 0.25rem;
   width: 1rem;
   background-color: white;
   transform: translate(-50%, -50%);
+  border-radius: 3px;
 }
 
 .remove:after {
@@ -55,19 +61,21 @@ body {
   left: 50%;
   top: 50%;
   content: '';
-  height: 0.125rem;
+  height: 0.25rem;
   width: 1rem;
   background-color: white;
   transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 3px;
 }
 
 .remove:before {
   position: absolute;
   content: '';
   height: 1rem;
-  width: 0.125rem;
+  width: 0.25rem;
   background-color: white;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
+  border-radius: 3px;
 }

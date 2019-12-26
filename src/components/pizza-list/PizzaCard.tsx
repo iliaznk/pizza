@@ -6,15 +6,15 @@ type Props = PizzaItem
 const PizzaCard: React.FC<Props> = (props) => {
   const { name, price, description, image } = props
   return (
-    <article className="card br3 w-100 h-100 pb3 flex flex-column sans-serif">
+    <article className="bg-white card br3 w-100 h-100 pb3 flex flex-column sans-serif">
       <header>
         <div
           className="ph2 h4 contain bg-center"
           style={{ backgroundImage: `url(images/${image}` }}
         />
-        <h2 className="small-caps ph4 ma0 fw5 black-70 ">{name}</h2>
+        <h2 className="blue small-caps ph4 ma0 fw9">{name}</h2>
       </header>
-      <p className="ph4 h-100 mt2 f5 fw4 black-50">{description}</p>
+      <p className="ph4 h-100 mt2 f5 fw4 black-70">{description}</p>
       <footer className="ph4 ttu fw6 f5 flex blue justify-between items-center">
         <span>from</span>
         <span className="f1 fw3 hot-pink">
