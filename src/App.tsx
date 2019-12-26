@@ -1,4 +1,6 @@
 import React, { ReactElement } from 'react'
+import { Cart } from './components/cart/Cart'
+import { PizzaList } from './components/pizza-list/PizzaList'
 
 const pizzaList = [
   {
@@ -91,21 +93,11 @@ const pizzaList = [
   },
 ]
 
-type PizzaCard = {
-  name: string
-  price: {
-    eur: number
-    usd: number
-  }
-  description: string
-  image: string
-}
-
 const App: React.FC = () => {
   const _renderHeader = (): ReactElement => {
     return (
-      <header className="tc pv3">
-        <nav>
+      <header className="pv3">
+        <nav className="tc flex items-center justify-center">
           <span className="fw3 f1 ttu black-60 avenir">
             pi
             <span className="fw9 i hot-pink">
@@ -113,52 +105,22 @@ const App: React.FC = () => {
             </span>
             a
           </span>
+          <div className="absolute right-1 top-1 small-caps sans-serif f4 fw3">
+            <div>
+              cart: <span>3 pizzas ($25)</span>
+            </div>
+          </div>
         </nav>
       </header>
     )
   }
 
-  const _renderPizzaCard = (data: PizzaCard): ReactElement => {
-    const { name, price, description, image } = data
-    return (
-      <article className="card br3 w-100 h-100 pb3 flex flex-column sans-serif">
-        <header>
-          <div
-            className="ph2 h4 contain bg-center"
-            style={{ backgroundImage: `url(images/${image}` }}
-          />
-          <h2 className="small-caps ph4 ma0 fw5 black-70 ">{name}</h2>
-        </header>
-        <p className="ph4 h-100 mt2 f5 fw4 black-50">{description}</p>
-        <footer className="ph4 ttu fw6 f5 flex blue justify-between items-center">
-          <span>from</span>
-          <span className="f1 fw3 hot-pink">
-            <span className="f3 fw3 o-70">$</span>
-            {price.usd}
-          </span>
-          <button className="ttu fw6 bg-animate hover-bg-light-pink blue b--blue br-pill ba bw2 w-40 pv2 db pointer">
-            Order
-          </button>
-        </footer>
-      </article>
-    )
-  }
-
-  const _renderPizzaList = (data: PizzaCard[]): ReactElement[] => {
-    return data.map((item) => {
-      return (
-        <div className="w-third pa2" key={item.name}>
-          {_renderPizzaCard(item)}
-        </div>
-      )
-    })
-  }
-
   return (
     <div className="App sans-serif">
       {_renderHeader()}
-      <main className="flex flex-wrap center w-75">
-        {_renderPizzaList(pizzaList)}
+      <main className="flex flex-wrap center w-50 mb4">
+        <PizzaList data={pizzaList} />
+        <Cart data={pizzaList} />
       </main>
     </div>
   )
