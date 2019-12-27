@@ -1,7 +1,5 @@
-import { Route, Switch } from 'react-router-dom'
-import { Cart } from '../cart/Cart'
-import { PizzaList } from '../pizza-list/PizzaList'
-import React from 'react'
+import React, { ReactElement } from 'react'
+import { Cart } from './cart'
 
 const pizzaList = [
   {
@@ -94,17 +92,10 @@ const pizzaList = [
   },
 ]
 
-const RouterSwitch: React.FC = () => {
-  return (
-    <Switch>
-      <Route exact path="/">
-        <PizzaList data={pizzaList} />
-      </Route>
-      <Route path="/cart">
-        <Cart data={pizzaList} />
-      </Route>
-    </Switch>
-  )
+class CartContainer extends React.Component {
+  render(): ReactElement {
+    return <Cart data={pizzaList} />
+  }
 }
 
-export { RouterSwitch }
+export default CartContainer

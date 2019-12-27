@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react'
-import { PizzaCard } from './PizzaCard'
+import { PizzaCard } from './pizza-card'
 import { PizzaItem } from 'types'
 
 type Props = {

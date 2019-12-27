@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
-import { Header } from './components/common/header/Header'
+import { Header } from './components/common/header/header'
 import React from 'react'
-import { RouterSwitch } from './components/router-switch/RouterSwitch'
+import { RouterSwitch } from './components/router-switch/router-switch'
 
 const App: React.FC = () => {
   return (
