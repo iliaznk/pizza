@@ -92,10 +92,8 @@ const pizzaList = [
   },
 ]
 
-class CartContainer extends React.Component {
+export class CartContainer extends React.Component {
   render(): ReactElement {
     return <Cart data={pizzaList} />
   }
 }
-
-export default CartContainer

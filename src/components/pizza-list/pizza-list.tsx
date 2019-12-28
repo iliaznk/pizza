@@ -6,7 +6,7 @@ type Props = {
   data: PizzaItem[]
 }
 
-const PizzaList: React.FC<Props> = (props): ReactElement => {
+export const PizzaList: React.FC<Props> = (props): ReactElement => {
   const { data } = props
   return (
     <>
@@ -22,5 +22,3 @@ const PizzaList: React.FC<Props> = (props): ReactElement => {
     </>
   )
 }
-
-export { PizzaList }

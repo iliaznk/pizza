@@ -6,7 +6,7 @@ type Props = {
   data: PizzaItem[]
 }
 
-const Cart: React.FC<Props> = (props) => {
+export const Cart: React.FC<Props> = (props) => {
   const { data } = props
 
   const _renderTotal = (): ReactElement => {
@@ -22,5 +22,3 @@ const Cart: React.FC<Props> = (props) => {
     </div>
   )
 }
-
-export { Cart }

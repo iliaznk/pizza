@@ -1,31 +1,26 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-const METHOD = {
-  FETCH: 'FETCH',
-  CREATE: 'CREATE',
+export enum ApiProviderMethod {
+  FETCH = 'FETCH',
+  CREATE = 'CREATE',
 }
-
-const STATUS = {
-  PENDING: 'PENDING',
-  DONE: 'DONE',
-}
-
-type ApiProviderMethod = keyof typeof METHOD
-
-type ApiProviderStatus = keyof typeof STATUS
 
 type ApiProviderActionPayload = {
   resource: string
   method: ApiProviderMethod
-  error?: string
+  data?: any
+  error?: any
+}
+
+type ApiProviderMethodState = {
+  isLoading: boolean
+  data?: any
+  error?: any
 }
 
 type ApiProviderState = {
   [resource: string]: {
-    [key in keyof ApiProviderMethod]: {
-      status: ApiProviderStatus
-      error?: string
-    }
+    [method: string]: ApiProviderMethodState
   }
 }
 
@@ -38,19 +33,41 @@ const apiProviderSlice = createSlice({
       action: PayloadAction<ApiProviderActionPayload>,
     ): void => {
       const { resource, method } = action.payload
-      state[resource][method]['status'] = STATUS.PENDING
+
+      if (!state[resource]) {
+        state[resource] = {
+          [method]: {} as ApiProviderMethodState,
+        }
+      }
+
+      state[resource][method] = {
+        isLoading: true,
+      }
     },
-    requestEnd: (
+    requestSuccess: (
+      state,
+      action: PayloadAction<ApiProviderActionPayload>,
+    ): void => {
+      const { resource, method, data } = action.payload
+      state[resource][method] = {
+        isLoading: false,
+        data,
+      }
+    },
+    requestFailure: (
       state,
       action: PayloadAction<ApiProviderActionPayload>,
     ): void => {
       const { resource, method, error } = action.payload
       state[resource][method] = {
-        status: STATUS.DONE,
+        isLoading: false,
         error,
       }
     },
   },
 })
 
-export { apiProviderSlice }
+export const {
+  actions: apiProviderActions,
+  reducer: apiProviderReducer,
+} = apiProviderSlice

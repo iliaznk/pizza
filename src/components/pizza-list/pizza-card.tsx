@@ -3,7 +3,7 @@ import React from 'react'
 
 type Props = PizzaItem
 
-const PizzaCard: React.FC<Props> = (props) => {
+export const PizzaCard: React.FC<Props> = (props) => {
   const { name, price, description, image } = props
   return (
     <article className="bg-white card br3 w-100 h-100 pb3 flex flex-column sans-serif">
@@ -28,5 +28,3 @@ const PizzaCard: React.FC<Props> = (props) => {
     </article>
   )
 }
-
-export { PizzaCard }

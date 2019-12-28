@@ -1,5 +1,7 @@
 import React, { ReactElement } from 'react'
 import { PizzaList } from './pizza-list'
+import { connect } from 'react-redux'
+import { fetchPizzaList } from './pizza-list.actions'
 
 const pizzaList = [
   {
@@ -92,10 +94,30 @@ const pizzaList = [
   },
 ]
 
-class PizzaListContainer extends React.Component {
+export class PizzaListContainer extends React.Component {
+  componentDidMount(): void {
+    //@ts-ignore
+    this.props.fetchPizzaList()
+  }
+
   render(): ReactElement {
+    //@ts-ignore
     return <PizzaList data={pizzaList} />
   }
 }
 
-export default PizzaListContainer
+const mapDispatch = {
+  fetchPizzaList,
+}
+
+const mapState = (state: any): any => {
+  console.log('MAP STATE', state)
+  return {
+    state,
+  }
+}
+
+export const PizzaListContainerConnected = connect(
+  mapState,
+  mapDispatch,
+)(PizzaListContainer)

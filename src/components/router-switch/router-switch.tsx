@@ -1,13 +1,13 @@
 import { Route, Switch } from 'react-router-dom'
-import CartContainer from '../cart/cart.container'
-import PizzaListContainer from '../pizza-list/pizza-list.container'
+import { CartContainer } from '../cart/cart.container'
+import { PizzaListContainerConnected } from '../pizza-list/pizza-list.container'
 import React from 'react'
 
-const RouterSwitch: React.FC = () => {
+export const RouterSwitch: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <PizzaListContainer />
+        <PizzaListContainerConnected />
       </Route>
       <Route path="/cart">
         <CartContainer />
@@ -15,5 +15,3 @@ const RouterSwitch: React.FC = () => {
     </Switch>
   )
 }
-
-export { RouterSwitch }

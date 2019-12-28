@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
 
-const Header: React.FC = () => {
+export const Header: React.FC = () => {
   return (
     <header className="pv3">
       <nav className="tc flex items-center justify-center">
@@ -23,5 +23,3 @@ const Header: React.FC = () => {
     </header>
   )
 }
-
-export { Header }

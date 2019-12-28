@@ -3,7 +3,7 @@ import { PizzaItem } from '../../types'
 
 type Props = PizzaItem
 
-const CartItem: React.FC<Props> = (props): ReactElement => {
+export const CartItem: React.FC<Props> = (props): ReactElement => {
   const { image, name } = props
 
   const _renderQtyControls = (): ReactElement => {
@@ -40,5 +40,3 @@ const CartItem: React.FC<Props> = (props): ReactElement => {
     </div>
   )
 }
-
-export { CartItem }
