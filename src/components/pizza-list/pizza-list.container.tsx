@@ -1,7 +1,13 @@
+import {
+  ApiProviderMethod,
+  ApiProviderResource,
+} from '../../services/api-provider/api-provider.slice'
+import { ConnectedProps, connect } from 'react-redux'
 import React, { ReactElement } from 'react'
 import { PizzaList } from './pizza-list'
-import { connect } from 'react-redux'
+import { RootState } from 'root-reducer'
 import { fetchPizzaList } from './pizza-list.actions'
+import { makeApiResourceMethodSelector } from '../../services/api-provider/api-provider.selectors'
 
 const pizzaList = [
   {
@@ -94,14 +100,17 @@ const pizzaList = [
   },
 ]
 
-export class PizzaListContainer extends React.Component {
+type ReduxProps = ConnectedProps<typeof connector>
+type Props = ReduxProps
+
+export class PizzaListContainer extends React.Component<Props> {
   componentDidMount(): void {
-    //@ts-ignore
     this.props.fetchPizzaList()
   }
 
   render(): ReactElement {
-    //@ts-ignore
+    console.log('PIZZA LIST CONTAINER')
+    console.log(this.props)
     return <PizzaList data={pizzaList} />
   }
 }
@@ -110,14 +119,15 @@ const mapDispatch = {
   fetchPizzaList,
 }
 
-const mapState = (state: any): any => {
-  console.log('MAP STATE', state)
+const mapState = (state: RootState): any => {
   return {
-    state,
+    api: makeApiResourceMethodSelector(
+      ApiProviderResource.PIZZA_LIST,
+      ApiProviderMethod.FETCH,
+    )(state),
   }
 }
 
-export const PizzaListContainerConnected = connect(
-  mapState,
-  mapDispatch,
-)(PizzaListContainer)
+const connector = connect(mapState, mapDispatch)
+
+export const PizzaListContainerConnected = connector(PizzaListContainer)

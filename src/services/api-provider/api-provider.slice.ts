@@ -1,8 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
+const API_PROVIDER_NAME = 'apiProvider'
+
 export enum ApiProviderMethod {
   FETCH = 'FETCH',
   CREATE = 'CREATE',
+}
+
+export enum ApiProviderResource {
+  PIZZA_LIST = '/pizza',
 }
 
 type ApiProviderActionPayload = {
@@ -12,20 +18,22 @@ type ApiProviderActionPayload = {
   error?: any
 }
 
-type ApiProviderMethodState = {
+export type ApiProviderMethodState = {
   isLoading: boolean
   data?: any
   error?: any
 }
 
-type ApiProviderState = {
-  [resource: string]: {
-    [method: string]: ApiProviderMethodState
-  }
+export type ApiProviderResourceState = {
+  [method in ApiProviderMethod]: ApiProviderMethodState
+}
+
+export type ApiProviderState = {
+  [resource in ApiProviderResource]: ApiProviderResourceState
 }
 
 const apiProviderSlice = createSlice({
-  name: 'apiProvider',
+  name: API_PROVIDER_NAME,
   initialState: {} as ApiProviderState,
   reducers: {
     requestStart: (
@@ -70,4 +78,5 @@ const apiProviderSlice = createSlice({
 export const {
   actions: apiProviderActions,
   reducer: apiProviderReducer,
+  name: apiProviderName,
 } = apiProviderSlice
