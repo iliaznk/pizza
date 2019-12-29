@@ -1,7 +1,7 @@
 import {
-  ApiProviderActionPayload,
   ApiProviderMethod,
   ApiProviderResource,
+  RequestActionPayload,
   apiProviderActions,
 } from './api-provider.slice'
 import { Middleware, PayloadAction } from '@reduxjs/toolkit'
@@ -114,12 +114,12 @@ function _fetch(url: string, data: RequestInit): Promise<Response> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(new Response(RESPONSE_MAP[urlObj.pathname]))
-    }, 1000)
+    }, 2000)
   })
 }
 
 const apiProviderMiddleware: Middleware = ({ dispatch }) => (next) => async (
-  action: PayloadAction<ApiProviderActionPayload>,
+  action: PayloadAction<RequestActionPayload>,
 ): Promise<any> => {
   const result = next(action)
 

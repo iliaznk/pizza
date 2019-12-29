@@ -1,9 +1,9 @@
 import React, { ReactElement } from 'react'
-import { CartItem } from './cart-item'
-import { PizzaItem } from '../../types'
+import { CartItem } from './cart.selectors'
+import { CartItemCard } from './cart-item-card'
 
 type Props = {
-  data: PizzaItem[]
+  data: CartItem[]
 }
 
 export const Cart: React.FC<Props> = (props) => {
@@ -16,7 +16,7 @@ export const Cart: React.FC<Props> = (props) => {
   return (
     <div className="w-100 mb3 mh5">
       {data.map((item) => {
-        return <CartItem {...item} key={item.name} />
+        return <CartItemCard {...item} key={item.name} />
       })}
       {_renderTotal()}
     </div>

@@ -1,6 +1,16 @@
 import React, { ReactElement } from 'react'
 import { PizzaCard } from './pizza-card'
-import { PizzaItem } from 'types'
+
+export type PizzaItem = {
+  id: string
+  name: string
+  price: {
+    eur: number
+    usd: number
+  }
+  description: string
+  image: string
+}
 
 type Props = {
   data: PizzaItem[]

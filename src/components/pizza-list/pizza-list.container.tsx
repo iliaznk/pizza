@@ -1,14 +1,10 @@
-import {
-  ApiProviderMethod,
-  ApiProviderResource,
-} from '../../services/api-provider/api-provider.slice'
 import { ConnectedProps, connect } from 'react-redux'
 import React, { ReactElement } from 'react'
 import { PizzaList } from './pizza-list'
 import { RootState } from 'root-reducer'
-import { Spinner } from '../common/spinner/spinner'
+import { Spinner } from 'components/common/spinner/spinner'
 import { fetchPizzaList } from './pizza-list.actions'
-import { makeApiResourceMethodSelector } from '../../services/api-provider/api-provider.selectors'
+import { pizzaListSelector } from './pizza-list.selectors'
 
 type ReduxProps = ConnectedProps<typeof connector>
 type Props = ReduxProps
@@ -22,11 +18,15 @@ export class PizzaListContainer extends React.Component<Props> {
     }
   }
 
-  render(): ReactElement {
+  render(): ReactElement | null {
     const { isLoading = false, data } = this.props.api
 
-    if (!data || isLoading) {
+    if (isLoading) {
       return <Spinner />
+    }
+
+    if (!data) {
+      return null
     }
 
     return <PizzaList data={data} />
@@ -37,12 +37,10 @@ const mapDispatch = {
   fetchPizzaList,
 }
 
-const mapState = (state: RootState): any => {
+// eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+const mapState = (state: RootState) => {
   return {
-    api: makeApiResourceMethodSelector(
-      ApiProviderResource.PIZZA_LIST,
-      ApiProviderMethod.FETCH,
-    )(state),
+    api: pizzaListSelector(state),
   }
 }
 

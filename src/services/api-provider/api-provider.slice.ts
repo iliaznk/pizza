@@ -11,13 +11,6 @@ export enum ApiProviderResource {
   PIZZA_LIST = '/pizza',
 }
 
-export type ApiProviderActionPayload = {
-  resource: string
-  method: ApiProviderMethod
-  data?: any
-  error?: any
-}
-
 export type ApiProviderMethodState = {
   isLoading: boolean
   data?: any
@@ -32,13 +25,20 @@ export type ApiProviderState = {
   [resource in ApiProviderResource]: ApiProviderResourceState
 }
 
+export type RequestActionPayload = {
+  resource: string
+  method: ApiProviderMethod
+  data?: any
+  error?: any
+}
+
 const apiProviderSlice = createSlice({
   name: API_PROVIDER_NAME,
   initialState: {} as ApiProviderState,
   reducers: {
     requestStart: (
       state,
-      action: PayloadAction<ApiProviderActionPayload>,
+      action: PayloadAction<RequestActionPayload>,
     ): void => {
       const { resource, method } = action.payload
 
@@ -54,7 +54,7 @@ const apiProviderSlice = createSlice({
     },
     requestSuccess: (
       state,
-      action: PayloadAction<ApiProviderActionPayload>,
+      action: PayloadAction<RequestActionPayload>,
     ): void => {
       const { resource, method, data } = action.payload
       state[resource][method] = {
@@ -64,7 +64,7 @@ const apiProviderSlice = createSlice({
     },
     requestFailure: (
       state,
-      action: PayloadAction<ApiProviderActionPayload>,
+      action: PayloadAction<RequestActionPayload>,
     ): void => {
       const { resource, method, error } = action.payload
       state[resource][method] = {

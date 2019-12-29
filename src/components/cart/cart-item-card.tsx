@@ -1,16 +1,16 @@
 import React, { ReactElement } from 'react'
-import { PizzaItem } from '../../types'
+import { CartItem } from './cart.selectors'
 
-type Props = PizzaItem
+type Props = CartItem
 
-export const CartItem: React.FC<Props> = (props): ReactElement => {
-  const { image, name } = props
+export const CartItemCard: React.FC<Props> = (props): ReactElement => {
+  const { image, name, qty, price } = props
 
   const _renderQtyControls = (): ReactElement => {
     return (
       <>
         <button className="flex pointer br-100 bg-blue o-30 glow bn qty-button justify-center minus" />
-        <div className="f3 mh2 fw6 near-black">20</div>
+        <div className="f3 mh2 fw6 near-black">{qty}</div>
         <button className="flex pointer br-100 bg-blue o-30 glow bn qty-button justify-center plus" />
         <button className="ml3 flex pointer br-100 o-30 glow bg-dark-red bn qty-button justify-center remove" />
       </>
@@ -18,7 +18,7 @@ export const CartItem: React.FC<Props> = (props): ReactElement => {
   }
 
   const _renderCost = (): ReactElement => {
-    return <div className="mr3 v-mid f3 fw6 hot-pink">$12</div>
+    return <div className="mr3 v-mid f3 fw6 hot-pink">${price.usd * qty}</div>
   }
 
   return (
