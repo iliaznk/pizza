@@ -1,4 +1,5 @@
 :root {
+  --rotate: 0deg;
   --card-size: 16;
   --card-w: calc(var(--card-size) * 1rem);
   --card-h: calc(var(--card-size) * 1.25rem);
@@ -44,7 +45,6 @@ body {
 
 .plus:after,
 .minus:after {
-  /*border: 1px white solid;*/
   position: absolute;
   left: 50%;
   top: 50%;
@@ -78,4 +78,24 @@ body {
   top: 50%;
   transform: translate(-50%, -50%) rotate(45deg);
   border-radius: 3px;
+}
+
+@keyframes scale {
+  0% {
+    transform: translate(-50%, -50%) scale(0.9);
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.1);
+    opacity: 1;
+  }
+}
+
+.spinner {
+  margin: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  animation: scale 0.5s ease-in-out infinite alternate;
+  transform: translate(-50%, -50%);
 }

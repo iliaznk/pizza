@@ -11,7 +11,7 @@ export enum ApiProviderResource {
   PIZZA_LIST = '/pizza',
 }
 
-type ApiProviderActionPayload = {
+export type ApiProviderActionPayload = {
   resource: string
   method: ApiProviderMethod
   data?: any

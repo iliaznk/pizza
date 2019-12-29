@@ -33,17 +33,13 @@ function makeApiResourceMethodSelector(
   method?: ApiProviderMethod,
 ): Selector<RootState, ApiProviderResourceState | ApiProviderMethodState> {
   return createSelector(apiProviderSelector, (state) => {
-    const resourceData = state[resource]
+    const result = state[resource] || {}
 
     if (!method) {
-      return resourceData
+      return result
     }
 
-    if (!resourceData) {
-      return resourceData
-    }
-
-    return resourceData[method]
+    return result[method] || {}
   })
 }
 
