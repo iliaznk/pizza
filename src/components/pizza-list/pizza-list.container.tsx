@@ -3,6 +3,7 @@ import React, { ReactElement } from 'react'
 import { PizzaList } from './pizza-list'
 import { RootState } from 'root-reducer'
 import { Spinner } from 'components/common/spinner/spinner'
+import { cartActions } from 'components/cart/cart.slice'
 import { fetchPizzaList } from './pizza-list.actions'
 import { pizzaListSelector } from './pizza-list.selectors'
 
@@ -20,6 +21,7 @@ export class PizzaListContainer extends React.Component<Props> {
 
   render(): ReactElement | null {
     const { isLoading = false, data } = this.props.api
+    const { handleItemAdd } = this.props
 
     if (isLoading) {
       return <Spinner />
@@ -29,12 +31,13 @@ export class PizzaListContainer extends React.Component<Props> {
       return null
     }
 
-    return <PizzaList data={data} />
+    return <PizzaList data={data} onItemAdd={handleItemAdd} />
   }
 }
 
 const mapDispatch = {
   fetchPizzaList,
+  handleItemAdd: cartActions.itemAdd,
 }
 
 // eslint-disable-next-line @typescript-eslint/explicit-function-return-type

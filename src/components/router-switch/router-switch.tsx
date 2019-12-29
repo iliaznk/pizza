@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom'
-import { CartContainerConnected } from '../cart/cart.container'
+import { Cart } from 'components/cart/cart'
 import { PizzaListContainerConnected } from '../pizza-list/pizza-list.container'
 import React from 'react'
 
@@ -10,7 +10,7 @@ export const RouterSwitch: React.FC = () => {
         <PizzaListContainerConnected />
       </Route>
       <Route path="/cart">
-        <CartContainerConnected />
+        <Cart />
       </Route>
     </Switch>
   )

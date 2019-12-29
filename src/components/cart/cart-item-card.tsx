@@ -1,18 +1,36 @@
 import React, { ReactElement } from 'react'
 import { CartItem } from './cart.selectors'
+import { cartActions } from './cart.slice'
+import { useDispatch } from 'react-redux'
 
 type Props = CartItem
 
 export const CartItemCard: React.FC<Props> = (props): ReactElement => {
-  const { image, name, qty, price } = props
+  const { image, name, qty, price, id } = props
+  const dispatch = useDispatch()
 
   const _renderQtyControls = (): ReactElement => {
     return (
       <>
-        <button className="flex pointer br-100 bg-blue o-30 glow bn qty-button justify-center minus" />
+        <button
+          className="flex pointer br-100 bg-blue o-30 glow bn qty-button justify-center minus"
+          onClick={(): void => {
+            dispatch(cartActions.itemRemove(id))
+          }}
+        />
         <div className="f3 mh2 fw6 near-black">{qty}</div>
-        <button className="flex pointer br-100 bg-blue o-30 glow bn qty-button justify-center plus" />
-        <button className="ml3 flex pointer br-100 o-30 glow bg-dark-red bn qty-button justify-center remove" />
+        <button
+          className="flex pointer br-100 bg-blue o-30 glow bn qty-button justify-center plus"
+          onClick={(): void => {
+            dispatch(cartActions.itemAdd(id))
+          }}
+        />
+        <button
+          className="ml3 flex pointer br-100 o-30 glow bg-dark-red bn qty-button justify-center remove"
+          onClick={(): void => {
+            dispatch(cartActions.itemRemoveAll(id))
+          }}
+        />
       </>
     )
   }

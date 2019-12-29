@@ -1,24 +1,36 @@
 import React, { ReactElement } from 'react'
-import { CartItem } from './cart.selectors'
 import { CartItemCard } from './cart-item-card'
+import { cartListSelector } from './cart.selectors'
+import { useSelector } from 'react-redux'
 
-type Props = {
-  data: CartItem[]
-}
+export const Cart: React.FC = (props) => {
+  const data = useSelector(cartListSelector)
+  const isEmpty = !data.length
 
-export const Cart: React.FC<Props> = (props) => {
-  const { data } = props
+  const renderTotal = (): ReactElement | null => {
+    if (isEmpty) {
+      return null
+    }
 
-  const _renderTotal = (): ReactElement => {
     return <div>TOTAL</div>
+  }
+
+  const renderItems = (): ReactElement[] | ReactElement => {
+    if (isEmpty) {
+      return (
+        <div className="tc mt4 f2 fw4 avenir blue">Your cart is empty :(</div>
+      )
+    }
+
+    return data.map((item) => {
+      return <CartItemCard {...item} key={item.name} />
+    })
   }
 
   return (
     <div className="w-100 mb3 mh5">
-      {data.map((item) => {
-        return <CartItemCard {...item} key={item.name} />
-      })}
-      {_renderTotal()}
+      {renderItems()}
+      {renderTotal()}
     </div>
   )
 }

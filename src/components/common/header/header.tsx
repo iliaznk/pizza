@@ -1,7 +1,25 @@
+import { CartItem, cartListSelector } from 'components/cart/cart.selectors'
 import { Link } from 'react-router-dom'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export const Header: React.FC = () => {
+  const cartList: CartItem[] = useSelector(cartListSelector)
+
+  const getCartQty = (): number => {
+    let qty = 0
+
+    if (!cartList.length) {
+      return qty
+    }
+
+    cartList.forEach((i) => {
+      qty += i.qty
+    })
+
+    return qty
+  }
+
   return (
     <header className="pv3">
       <nav className="tc flex items-center justify-center">
@@ -14,9 +32,9 @@ export const Header: React.FC = () => {
             a
           </span>
         </Link>
-        <div className="absolute right-1 top-1 small-caps sans-serif f4 fw3">
-          <Link to="/cart">
-            cart: <span>3 pizzas ($25)</span>
+        <div className="absolute right-2 top-1 small-caps sans-serif fw3 f4">
+          <Link to="/cart" className="blue no-underline underline-hover">
+            cart: <span className="hot-pink">{getCartQty()}</span>
           </Link>
         </div>
       </nav>

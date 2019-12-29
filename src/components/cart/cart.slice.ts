@@ -10,7 +10,7 @@ type ItemActionPayload = ItemId
 
 export const cartSlice = createSlice({
   name: CART_NAME,
-  initialState: ['1', '1', '2'] as CartState,
+  initialState: [] as CartState,
   reducers: {
     itemAdd: (state, action: PayloadAction<ItemActionPayload>): void => {
       const { payload } = action

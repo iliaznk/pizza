@@ -14,17 +14,23 @@ export type PizzaItem = {
 
 type Props = {
   data: PizzaItem[]
+  onItemAdd: (id: string) => void
 }
 
 export const PizzaList: React.FC<Props> = (props): ReactElement => {
-  const { data } = props
+  const { data, onItemAdd } = props
+
+  const handleOrderClick = (id: string): void => {
+    onItemAdd(id)
+  }
+
   return (
     <>
       {data.map(
         (item): ReactElement => {
           return (
             <div className="w-third pa2" key={item.name}>
-              <PizzaCard {...item} />
+              <PizzaCard {...item} onOrderClick={handleOrderClick} />
             </div>
           )
         },
