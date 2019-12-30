@@ -1,12 +1,22 @@
+import { CURRENCY_ITEMS } from 'components/common/header/header'
 import { PizzaItem } from './pizza-list'
 import React from 'react'
+import { currencySelector } from 'components/common/header/currency.selectors'
+import { useSelector } from 'react-redux'
 
 type Props = PizzaItem & {
   onOrderClick: (id: string) => void
 }
 
 export const PizzaCard: React.FC<Props> = (props) => {
+  const currency = useSelector(currencySelector)
   const { name, price, description, image, id, onOrderClick } = props
+
+  const getCurrencySymbol = (): string => {
+    //@ts-ignore
+    return CURRENCY_ITEMS.find((i) => i.id === currency).symbol
+  }
+
   return (
     <article className="bg-white card br3 w-100 h-100 pb3 flex flex-column sans-serif">
       <header>
@@ -19,8 +29,8 @@ export const PizzaCard: React.FC<Props> = (props) => {
       <p className="ph4 h-100 mt2 f5 fw4 black-70">{description}</p>
       <footer className="ph4 ttu flex justify-between items-center">
         <span className="f1 fw3 hot-pink">
-          <span className="f3 fw3 o-70">$</span>
-          {price.usd}
+          <span className="f3 fw3 o-70">{getCurrencySymbol()}</span>
+          {price[currency]}
         </span>
         <button
           className="ttu fw6 bg-animate hover-bg-light-pink blue b--blue br-pill ba bw2 w-40 pv2 db pointer"

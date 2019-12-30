@@ -1,13 +1,15 @@
 import React, { ReactElement } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { CartItem } from './cart.selectors'
 import { cartActions } from './cart.slice'
-import { useDispatch } from 'react-redux'
+import { currencySelector } from 'components/common/header/currency.selectors'
 
 type Props = CartItem
 
 export const CartItemCard: React.FC<Props> = (props): ReactElement => {
-  const { image, name, qty, price, id } = props
   const dispatch = useDispatch()
+  const currency = useSelector(currencySelector)
+  const { image, name, qty, price, id } = props
 
   const _renderQtyControls = (): ReactElement => {
     return (
@@ -36,7 +38,9 @@ export const CartItemCard: React.FC<Props> = (props): ReactElement => {
   }
 
   const _renderCost = (): ReactElement => {
-    return <div className="mr3 v-mid f3 fw6 hot-pink">${price.usd * qty}</div>
+    return (
+      <div className="mr3 v-mid f3 fw6 hot-pink">${price[currency] * qty}</div>
+    )
   }
 
   return (

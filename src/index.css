@@ -3,6 +3,7 @@
   --card-size: 16;
   --card-w: calc(var(--card-size) * 1rem);
   --card-h: calc(var(--card-size) * 1.25rem);
+  --bg-color: #fafafa;
 }
 
 * {
@@ -10,7 +11,7 @@
 }
 
 html {
-  background-color: #fafafa;
+  background-color: var(--bg-color);
 }
 
 body {
