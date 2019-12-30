@@ -10,12 +10,9 @@ type Props = PizzaItem & {
 
 export const PizzaCard: React.FC<Props> = (props) => {
   const currency = useSelector(currencySelector)
+  //@ts-ignore
+  const { symbol } = CURRENCY_ITEMS.find((i) => i.id === currency)
   const { name, price, description, image, id, onOrderClick } = props
-
-  const getCurrencySymbol = (): string => {
-    //@ts-ignore
-    return CURRENCY_ITEMS.find((i) => i.id === currency).symbol
-  }
 
   return (
     <article className="bg-white card br3 w-100 h-100 pb3 flex flex-column sans-serif">
@@ -29,7 +26,7 @@ export const PizzaCard: React.FC<Props> = (props) => {
       <p className="ph4 h-100 mt2 f5 fw4 black-70">{description}</p>
       <footer className="ph4 ttu flex justify-between items-center">
         <span className="f1 fw3 hot-pink">
-          <span className="f3 fw3 o-70">{getCurrencySymbol()}</span>
+          <span className="f3 fw3 o-70">{symbol}</span>
           {price[currency]}
         </span>
         <button
