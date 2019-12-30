@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-const CART_NAME = 'cart'
+const SLICE_NAME = 'cart'
 
 type ItemId = string
 
@@ -9,7 +9,7 @@ export type CartState = ItemId[]
 type ItemActionPayload = ItemId
 
 export const cartSlice = createSlice({
-  name: CART_NAME,
+  name: SLICE_NAME,
   initialState: [] as CartState,
   reducers: {
     itemAdd: (state, action: PayloadAction<ItemActionPayload>): void => {

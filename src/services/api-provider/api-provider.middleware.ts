@@ -114,7 +114,7 @@ function _fetch(url: string, data: RequestInit): Promise<Response> {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(new Response(RESPONSE_MAP[urlObj.pathname]))
-    }, 2000)
+    }, 1500)
   })
 }
 

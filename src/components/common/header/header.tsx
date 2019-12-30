@@ -56,7 +56,7 @@ export const Header: React.FC = () => {
   }
 
   return (
-    <header className="pv3 fixed top-0 w-100 z-999">
+    <header className="pv3 fixed top-0 w-100 z-1 _bg-main">
       <nav className="tc flex items-center justify-center">
         <div className="absolute left-1 top-1">{renderCurrencyButtons()}</div>
         <Link to="/" className="no-underline">

@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-const API_PROVIDER_NAME = 'apiProvider'
+const SLICE_NAME = 'apiProvider'
 
 export enum ApiProviderMethod {
   FETCH = 'FETCH',
@@ -33,7 +33,7 @@ export type RequestActionPayload = {
 }
 
 const apiProviderSlice = createSlice({
-  name: API_PROVIDER_NAME,
+  name: SLICE_NAME,
   initialState: {} as ApiProviderState,
   reducers: {
     requestStart: (

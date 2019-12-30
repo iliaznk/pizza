@@ -1,6 +1,7 @@
 import React, { ReactElement } from 'react'
 import { CURRENCY_ITEMS } from 'components/common/header/header'
 import { CartItemCard } from './cart-item-card'
+import { Checkout } from './checkout/checkout'
 import { cartListSelector } from './cart.selectors'
 import { currencySelector } from 'components/common/header/currency.selectors'
 import { useSelector } from 'react-redux'
@@ -54,22 +55,27 @@ export const Cart: React.FC = (props) => {
   }
 
   const renderItems = (): ReactElement[] | ReactElement => {
-    if (isEmpty) {
-      return (
-        <div className="tc mt4 f2 fw4 avenir blue">Your cart is empty :(</div>
-      )
-    }
-
     return data.map((item) => {
       totalItems += item.qty * item.price[currency]
       return <CartItemCard {...item} key={item.name} />
     })
   }
 
+  if (isEmpty) {
+    return (
+      <div className="w-100 mb3 mh5">
+        <div className="tc mt4 f2 fw4 avenir blue">Your cart is empty :(</div>
+      </div>
+    )
+  }
+
   return (
-    <div className="w-100 mb3 mh5">
-      {renderItems()}
-      {renderTotal()}
-    </div>
+    <>
+      <div className="w-100 mb3 mh5">
+        {renderItems()}
+        {renderTotal()}
+        <Checkout />
+      </div>
+    </>
   )
 }
