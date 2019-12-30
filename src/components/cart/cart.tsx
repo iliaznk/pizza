@@ -27,13 +27,24 @@ export const Cart: React.FC = (props) => {
 
     return (
       <div className="f3 fw3 near-black small-caps avenir tr">
-        <p className="mb1">
-          Delivery: {symbol}
-          {DELIVERY.price[currency]}
+        <p className="mv0">
+          pizza:{' '}
+          <span className="blue f2">
+            {symbol}
+            {totalItems}
+          </span>
         </p>
+        <p className="mv0">
+          delivery:{' '}
+          <span className="blue f2">
+            {symbol}
+            {DELIVERY.price[currency]}
+          </span>
+        </p>
+        <hr className="b--light-blue b--dashed" />
         <p className="mt0 f2 fw6">
-          Total:{' '}
-          <span className="fw7 hot-pink">
+          total:{' '}
+          <span className="fw7 hot-pink f1">
             {symbol}
             {totalItems + DELIVERY.price[currency]}
           </span>

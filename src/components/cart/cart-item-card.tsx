@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { CURRENCY_ITEMS } from 'components/common/header/header'
 import { CartItem } from './cart.selectors'
 import { cartActions } from './cart.slice'
 import { currencySelector } from 'components/common/header/currency.selectors'
@@ -9,6 +10,8 @@ type Props = CartItem
 export const CartItemCard: React.FC<Props> = (props): ReactElement => {
   const dispatch = useDispatch()
   const currency = useSelector(currencySelector)
+  //@ts-ignore
+  const { symbol } = CURRENCY_ITEMS.find((i) => i.id === currency)
   const { image, name, qty, price, id } = props
 
   const _renderQtyControls = (): ReactElement => {
@@ -39,7 +42,10 @@ export const CartItemCard: React.FC<Props> = (props): ReactElement => {
 
   const _renderCost = (): ReactElement => {
     return (
-      <div className="mr3 v-mid f3 fw6 hot-pink">${price[currency] * qty}</div>
+      <div className="mr3 v-mid f3 fw6 hot-pink">
+        {symbol}
+        {price[currency] * qty}
+      </div>
     )
   }
 
